@@ -1,0 +1,8 @@
+Ofes (Organiser For Embedded Systems)
+http://github.com/jojojoris/Ofes
+
+Copyright ©2010 Joris Vergeer (jojojoris@hotmail.com)
+
+Ofes is a open source organiser for embedded systems like iPhone, PSP and iPod.
+It's written in C++.
+The main goal is to create a simple to use organiser software which works on all decent embedded devices.
