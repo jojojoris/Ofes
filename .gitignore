@@ -1,3 +1,4 @@
+
 Debug
 Release
 .project
@@ -8,3 +9,4 @@ Release
 *.prx
 PARAM.SFO
 EBOOT.PBP
+*.d

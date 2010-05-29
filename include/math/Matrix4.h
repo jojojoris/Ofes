@@ -26,11 +26,35 @@ public:
 
 	void multiply(const Matrix4* m);
 
+	void rotateX(float rad);
+	void rotateY(float rad);
+	void rotateZ(float rad);
+	void rotateXY(float rad);
+	void rotateXZ(float rad);
+	void rotateYZ(float rad);
+	void rotateXYZ(float rad);
+
+	void translate(float x, float y, float z);
+
 	union _matrix {
 		float m[16];
 		struct {
 			float m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23,
 					m30, m31, m32, m33;
+		};
+		struct {
+			struct{
+				float x, y, z, w;
+			}x;
+			struct{
+				float x, y, z, w;
+			}y;
+			struct{
+				float x, y, z, w;
+			}z;
+			struct{
+				float x, y, z, w;
+			}w;
 		};
 	} matrix
 #ifdef PSP
