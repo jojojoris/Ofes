@@ -36,6 +36,8 @@ public:
 
 	void translate(float x, float y, float z);
 
+	void ortho(float left, float right, float bottom, float top, float nearVal, float farVal);
+
 	union _matrix {
 		float m[16];
 		struct {

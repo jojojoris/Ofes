@@ -7,7 +7,7 @@
 
 #include <math/Matrix4.h>
 
-#ifndef GENERIC
+#ifdef GENERIC
 
 #include <math.h>
 
@@ -15,7 +15,7 @@ using namespace Ofes;
 using namespace Math;
 
 Matrix4::Matrix4() {
-	zero();
+	identity();
 }
 
 Matrix4::~Matrix4() {
@@ -38,7 +38,7 @@ Matrix4& Matrix4::operator*=(const Matrix4& m) {
 }
 
 void Matrix4::identity() {
-	matrix.m01 = matrix.m01 = matrix.m03 = matrix.m10 = matrix.m12 = matrix.m13
+	matrix.m01 = matrix.m02 = matrix.m03 = matrix.m10 = matrix.m12 = matrix.m13
 			= matrix.m20 = matrix.m21 = matrix.m23 = matrix.m30 = matrix.m31
 					= matrix.m32 = 0.0f;
 
@@ -76,7 +76,6 @@ void Matrix4::rotateX(float rad) {
 	Matrix4 tmp;
 	float f_Sin = sinf(rad);
 	float f_Cos = cosf(rad);
-	tmp.identity();
 	tmp.matrix.m11 = f_Cos;
 	tmp.matrix.m12 = f_Sin;
 	tmp.matrix.m22 = f_Cos;
@@ -88,7 +87,6 @@ void Matrix4::rotateY(float rad) {
 	Matrix4 tmp;
 	float f_Sin = sinf(rad);
 	float f_Cos = cosf(rad);
-	tmp.identity();
 	tmp.matrix.m00 = f_Cos;
 	tmp.matrix.m02 = -f_Sin;
 	tmp.matrix.m22 = f_Cos;
@@ -100,7 +98,6 @@ void Matrix4::rotateZ(float rad) {
 	Matrix4 tmp;
 	float f_Sin = sinf(rad);
 	float f_Cos = cosf(rad);
-	tmp.identity();
 	tmp.matrix.m00 = f_Cos;
 	tmp.matrix.m01 = f_Sin;
 	tmp.matrix.m11 = f_Cos;
@@ -131,11 +128,22 @@ void Matrix4::rotateXYZ(float rad) {
 
 void Matrix4::translate(float x, float y, float z) {
 	Matrix4 tmp;
-	tmp.identity();
 	tmp.matrix.m30 = x;
 	tmp.matrix.m31 = y;
 	tmp.matrix.m32 = z;
 	multiply(&tmp);
 }
+
+void Matrix4::ortho(float left, float right, float bottom, float top, float nearVal, float farVal){
+	Matrix4 tmp;
+	tmp.matrix.m00 = 2.0f/(right-left);
+	tmp.matrix.m11 = 2.0f/(top-bottom);
+	tmp.matrix.m22 = -2.0f/(farVal-nearVal);
+	tmp.matrix.m30 = -(right+left)/(right-left);
+	tmp.matrix.m31 = -(top+bottom)/(top-bottom);
+	tmp.matrix.m32 = -(farVal+nearVal)/(farVal-nearVal);
+	multiply(&tmp);
+}
+
 
 #endif //GENERIC
